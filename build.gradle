@@ -1,3 +1,5 @@
+import javafx.beans.property.SimpleObjectProperty
+
 buildscript {
     ext {
         springBootVersion = '2.1.9.RELEASE'
@@ -26,6 +28,8 @@ repositories {
 dependencies {
     implementation("org.projectlombok:lombok")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
