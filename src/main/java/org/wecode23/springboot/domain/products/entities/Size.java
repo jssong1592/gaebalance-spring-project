@@ -5,8 +5,7 @@ import javax.persistence.*;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "sizes")
 public class Size {
@@ -19,4 +18,10 @@ public class Size {
     @Column(name = "name", length = 45)
     private String name;
 
+    @Builder
+    public Size(String name) {
+
+        this.name = name;
+
+    }
 }

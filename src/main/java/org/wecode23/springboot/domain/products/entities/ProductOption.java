@@ -5,11 +5,11 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "products_options")
 public class ProductOption {
@@ -32,4 +32,12 @@ public class ProductOption {
     @Column(name = "stock")
     private Integer stock;
 
+    @Builder
+    public ProductOption(Product product, Size size, Integer stock) {
+
+        this.product = product;
+        this.size    = size;
+        this.stock   = stock;
+
+    }
 }

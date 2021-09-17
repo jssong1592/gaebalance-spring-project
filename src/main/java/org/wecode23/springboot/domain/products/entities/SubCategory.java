@@ -5,8 +5,7 @@ import javax.persistence.*;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "sub_categories")
 public class SubCategory {
@@ -24,4 +23,11 @@ public class SubCategory {
     @Column(name = "sub_category", length = 45, nullable = false)
     private String subCategory;
 
+    @Builder
+    public SubCategory(Category category, String subCategory) {
+
+        this.category    = category;
+        this.subCategory = subCategory;
+
+    }
 }

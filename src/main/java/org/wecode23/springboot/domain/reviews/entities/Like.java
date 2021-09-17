@@ -6,12 +6,12 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import org.wecode23.springboot.domain.products.entities.Category;
 import org.wecode23.springboot.domain.users.entities.User;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "likes")
 public class Like {
@@ -33,4 +33,12 @@ public class Like {
     @Column(name = "like")
     private Boolean like;
 
+    @Builder
+    public Like(User user, Review review, Boolean like) {
+
+        this.user    = user;
+        this.review  = review;
+        this.like    = like;
+
+    }
 }

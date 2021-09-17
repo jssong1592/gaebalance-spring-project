@@ -5,8 +5,7 @@ import javax.persistence.*;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "colors")
 public class Color {
@@ -18,5 +17,12 @@ public class Color {
 
     @Column(name = "name", length = 45)
     private String name;
+
+    @Builder
+    public Color(String name) {
+
+        this.name = name;
+
+    }
 
 }

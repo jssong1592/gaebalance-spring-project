@@ -6,10 +6,11 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Date;
+
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "detail_images")
 public class DetailImage {
@@ -27,4 +28,11 @@ public class DetailImage {
     @Column(name = "image_url", length = 2000)
     private String imageUrl;
 
+    @Builder
+    public DetailImage(Product product, String imageUrl) {
+
+        this.product  = product;
+        this.imageUrl = imageUrl;
+
+    }
 }

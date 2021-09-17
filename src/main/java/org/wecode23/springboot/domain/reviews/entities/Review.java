@@ -13,8 +13,7 @@ import org.wecode23.springboot.domain.users.entities.User;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "reviews")
 public class Review {
@@ -52,4 +51,18 @@ public class Review {
     @CreationTimestamp
     private Date createdAt;
 
+    @Builder
+    public Review(User user, Product product, Integer sizeRating,
+                  Integer colorRating, Integer deliveryRating, String comment,
+                  String title) {
+
+        this.user           = user;
+        this.product        = product;
+        this.sizeRating     = sizeRating;
+        this.colorRating    = colorRating;
+        this.deliveryRating = deliveryRating;
+        this.comment        = comment;
+        this.title          = title;
+
+    }
 }

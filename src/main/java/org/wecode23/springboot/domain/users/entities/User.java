@@ -10,8 +10,7 @@ import org.wecode23.springboot.domain.products.entities.Size;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(
         name = "users",
@@ -32,7 +31,7 @@ public class User {
     private String name;
 
     @Column(name = "gender", nullable = false)
-    private boolean gender;
+    private Boolean gender;
 
     @Column(name = "birth_date", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -58,4 +57,16 @@ public class User {
     )
     private Set<Color> color;
 
+    @Builder
+    public User(String name, Boolean gender, Date birthDate,
+                String phoneNumber, String email, String password) {
+
+        this.name        = name;
+        this.gender      = gender;
+        this.birthDate   = birthDate;
+        this.phoneNumber = phoneNumber;
+        this.email       = email;
+        this.password    = password;
+
+    }
 }

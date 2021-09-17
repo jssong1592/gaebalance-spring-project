@@ -6,8 +6,7 @@ import java.util.Date;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "product")
 public class Product {
@@ -47,4 +46,20 @@ public class Product {
     @Column(name = "group", length = 45)
     private String group;
 
+    @Builder
+    public Product(Category subCategory, Color color, String name,
+                   Double price, String styleCode, Date manufactureDate,
+                   String description, String imageUrl, String group) {
+
+        this.subCategory     = subCategory;
+        this.color           = color;
+        this.name            = name;
+        this.price           = price;
+        this.styleCode       = styleCode;
+        this.manufactureDate = manufactureDate;
+        this.description     = description;
+        this.imageUrl        = imageUrl;
+        this.group           = group;
+
+    }
 }

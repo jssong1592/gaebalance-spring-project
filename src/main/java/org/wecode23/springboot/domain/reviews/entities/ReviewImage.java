@@ -8,8 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "review_images")
 public class ReviewImage {
@@ -27,4 +26,11 @@ public class ReviewImage {
     @Column(name = "image_url", length = 2000)
     private String imageUrl;
 
+    @Builder
+    public ReviewImage(Review review, String imageUrl) {
+
+        this.review   = review;
+        this.imageUrl = imageUrl;
+
+    }
 }
