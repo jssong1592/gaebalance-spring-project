@@ -1,6 +1,8 @@
 package org.wecode23.springboot.web.dto;
 
 import org.junit.Test;
+import org.wecode23.springboot.dto.HelloResponseDto;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HelloResponseDtoTest {

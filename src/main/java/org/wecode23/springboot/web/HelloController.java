@@ -3,7 +3,7 @@ package org.wecode23.springboot.web;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.wecode23.springboot.web.dto.HelloResponseDto;
+import org.wecode23.springboot.dto.HelloResponseDto;
 
 @RestController
 public class HelloController {

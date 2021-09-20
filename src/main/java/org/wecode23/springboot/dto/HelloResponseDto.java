@@ -1,4 +1,4 @@
-package org.wecode23.springboot.web.dto;
+package org.wecode23.springboot.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
