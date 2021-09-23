@@ -1,11 +1,9 @@
 package org.wecode23.springboot.dto;
 
-
 import lombok.Getter;
 import org.wecode23.springboot.domain.users.entities.User;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 public class UserResponseDto {

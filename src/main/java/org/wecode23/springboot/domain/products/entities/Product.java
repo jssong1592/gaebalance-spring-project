@@ -2,7 +2,7 @@ package org.wecode23.springboot.domain.products.entities;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @ToString
 @Getter
@@ -18,7 +18,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "sub_category_id")
-    private Category subCategory;
+    private SubCategory subCategory;
 
     @ManyToOne
     @JoinColumn(name = "color_id")
@@ -33,9 +33,11 @@ public class Product {
     @Column(name = "style_code")
     private String styleCode;
 
+    @Column(name = "origin")
+    private String origin;
+
     @Column(name = "manufacture_date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date manufactureDate;
+    private LocalDate manufactureDate;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
@@ -47,15 +49,17 @@ public class Product {
     private String group;
 
     @Builder
-    public Product(Category subCategory, Color color, String name,
-                   Double price, String styleCode, Date manufactureDate,
-                   String description, String imageUrl, String group) {
+    public Product(SubCategory subCategory, Color color, String name,
+                   Double price, String styleCode, String origin,
+                   LocalDate manufactureDate, String description, String imageUrl,
+                   String group) {
 
         this.subCategory     = subCategory;
         this.color           = color;
         this.name            = name;
         this.price           = price;
         this.styleCode       = styleCode;
+        this.origin          = origin;
         this.manufactureDate = manufactureDate;
         this.description     = description;
         this.imageUrl        = imageUrl;
