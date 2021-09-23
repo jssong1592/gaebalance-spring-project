@@ -2,7 +2,7 @@ package org.wecode23.springboot.domain.users.entities;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import org.wecode23.springboot.domain.products.entities.Color;
@@ -34,8 +34,7 @@ public class User {
     private Boolean gender;
 
     @Column(name = "birth_date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "phone_number", length = 50, nullable = false)
     private String phoneNumber;
@@ -45,6 +44,9 @@ public class User {
 
     @Column(name = "password", length = 200, nullable = false)
     private String password;
+
+    @Column(name = "address", length = 200, nullable = false)
+    private String address;
 
     @OneToOne
     @JoinColumn(name = "size_id")
@@ -58,8 +60,9 @@ public class User {
     private Set<Color> color;
 
     @Builder
-    public User(String name, Boolean gender, Date birthDate,
-                String phoneNumber, String email, String password) {
+    public User(String name, Boolean gender, LocalDate birthDate,
+                String phoneNumber, String email, String password,
+                String address, Size size) {
 
         this.name        = name;
         this.gender      = gender;
@@ -67,6 +70,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.email       = email;
         this.password    = password;
+        this.address     = address;
+        this.size        = size;
 
     }
 }

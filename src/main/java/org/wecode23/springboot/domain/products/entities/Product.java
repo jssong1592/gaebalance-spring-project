@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     @Id

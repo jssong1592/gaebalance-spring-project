@@ -3,22 +3,22 @@ package org.wecode23.springboot.dto;
 
 import lombok.Getter;
 import org.wecode23.springboot.domain.users.entities.User;
-import org.wecode23.springboot.domain.products.entities.Size;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
-public class UsersResponseDto {
+public class UserResponseDto {
 
     private Long id;
     private String name;
     private Boolean gender;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String phoneNumber;
     private String email;
     private String size;
 
-    public UsersResponseDto(User entity) {
+    public UserResponseDto(User entity) {
 
         this.id = entity.getId();
         this.name = entity.getName();
