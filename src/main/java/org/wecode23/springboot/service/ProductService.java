@@ -1,16 +1,17 @@
 package org.wecode23.springboot.service;
 
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.wecode23.springboot.domain.products.entities.DetailImage;
 import org.wecode23.springboot.domain.products.entities.Product;
 import org.wecode23.springboot.domain.products.repositories.DetailImageRepository;
+import org.wecode23.springboot.domain.products.repositories.ProductQueryDSLRepository;
 import org.wecode23.springboot.domain.products.repositories.ProductRepository;
+import org.wecode23.springboot.dto.ProductListResponseDto;
 import org.wecode23.springboot.dto.ProductResponseDto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +19,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final DetailImageRepository detailImageRepository;
+    private final ProductQueryDSLRepository productQueryDSLRepository;
 
     public ProductResponseDto findById(Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
@@ -36,6 +38,19 @@ public class ProductService {
         productResponseDto.setImageList(urlList);
 
         return productResponseDto;
+    }
+
+    public List<ProductListResponseDto> findByFilter(Map<String, String[]> param) {
+        List<Product> productList = productQueryDSLRepository.findByFilter(param);
+        List<ProductListResponseDto> productListResponseDtoList = new ArrayList<>();
+        if(!productList.isEmpty()) {
+            for (Product product : productList) {
+                ProductListResponseDto productListResponseDto = new ProductListResponseDto(product);
+//                productListResponseDto.setStock();
+                productListResponseDtoList.add(productListResponseDto);
+            }
+        }
+        return productListResponseDtoList;
     }
 }
 

@@ -1,5 +1,6 @@
 package org.wecode23.springboot.domain.products.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -20,6 +21,7 @@ public class ProductOption {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "product_id")
     private Product product;

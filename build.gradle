@@ -1,21 +1,28 @@
-import javafx.beans.property.SimpleObjectProperty
-
 buildscript {
     ext {
         springBootVersion = '2.1.9.RELEASE'
     }
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"  // 플러그인의 저장소
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10"   // 플러그인 디펜던시
     }
+}
+
+plugins {
+    id 'io.franzbecker.gradle-lombok' version '1.7'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
 
 group 'org.wecode23'
 version '1.0-SNAPSHOT'
@@ -25,7 +32,21 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl {
+        extendsFrom compileClasspath
+    }
+}
+
 dependencies {
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-apt'
+    annotationProcessor 'com.querydsl:querydsl-apt'
+    annotationProcessor "org.projectlombok:lombok"
+
     implementation "org.projectlombok:lombok"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
@@ -34,3 +55,22 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
+
+def queryDslDir = "$buildDir/generated/sources/annotationProcessor/java/main"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = queryDslDir
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir queryDslDir
+        }
+    }
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}

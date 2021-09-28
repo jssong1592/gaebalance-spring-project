@@ -1,20 +1,25 @@
 package org.wecode23.springboot.web;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.wecode23.springboot.domain.users.entities.User;
+import org.wecode23.springboot.domain.users.repositories.UserDSLRepositoryTest;
 import org.wecode23.springboot.dto.UserResponseDto;
 import org.wecode23.springboot.dto.UserSaveRequestDto;
 import org.wecode23.springboot.service.UserService;
 
 import java.util.HashMap;
 
+
 @RequiredArgsConstructor
 @RestController
 public class UserApiController {
 
     private final UserService userService;
+    private final UserDSLRepositoryTest userDSLRepository;
 
     @GetMapping("/users/{id}")
     public UserResponseDto findById (@PathVariable Long id) {
@@ -33,5 +38,10 @@ public class UserApiController {
         return ResponseEntity.status(HttpStatus.CREATED).body(map);
     }
 
-
+//    @GetMapping("/user/find")
+//    public String find () {
+//        User result = userDSLRepository.findById(Long.valueOf(1));
+//        UserResponseDto r = new UserResponseDto(result);
+//        return r.getName();
+//    }
 }

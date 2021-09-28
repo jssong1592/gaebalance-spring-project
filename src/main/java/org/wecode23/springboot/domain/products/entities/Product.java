@@ -1,8 +1,10 @@
 package org.wecode23.springboot.domain.products.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @ToString
 @Getter
@@ -48,6 +50,10 @@ public class Product {
     @Column(name = "group", length = 45)
     private String group;
 
+    @OneToMany(mappedBy = "product")
+    @JsonManagedReference
+    private Set<ProductOption> productOptionSet;
+
     @Builder
     public Product(SubCategory subCategory, Color color, String name,
                    Double price, String styleCode, String origin,
@@ -64,6 +70,5 @@ public class Product {
         this.description     = description;
         this.imageUrl        = imageUrl;
         this.group           = group;
-
     }
 }
