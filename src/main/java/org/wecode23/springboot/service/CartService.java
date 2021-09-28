@@ -42,4 +42,12 @@ public class CartService {
 
         }
     }
+
+    @Transactional
+    public Long updateCartItem(Long id, CartSaveRequestDto requestDto) {
+        Cart cart = cartRepository.findById(id).get();
+        cart.updateCount(requestDto.getCount());
+
+        return id;
+    }
 }

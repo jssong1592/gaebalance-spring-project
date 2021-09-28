@@ -4,9 +4,7 @@ package org.wecode23.springboot.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.wecode23.springboot.dto.CartSaveRequestDto;
 import org.wecode23.springboot.service.CartService;
 
@@ -28,5 +26,16 @@ public class CartApiController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(map);
 
+    }
+
+    @PatchMapping("/carts/{id}")
+    public  ResponseEntity<HashMap> updateCartItem(@PathVariable Long id, @RequestBody CartSaveRequestDto requestDto) {
+
+        cartService.updateCartItem(id, requestDto);
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("MESSAGE",MessageResponse.OK);
+
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 }
