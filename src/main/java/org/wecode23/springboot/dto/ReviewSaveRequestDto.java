@@ -21,7 +21,9 @@ public class ReviewSaveRequestDto {
     private Integer sizeRating;
     private Integer colorRating;
     private Integer deliveryRating;
+    @Setter
     private String title;
+    @Setter
     private String comment;
 
     @Builder

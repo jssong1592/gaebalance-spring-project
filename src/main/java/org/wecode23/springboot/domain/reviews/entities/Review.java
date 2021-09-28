@@ -67,4 +67,9 @@ public class Review {
         this.title          = title;
 
     }
+
+    public void updateReview (String comment, String title) {
+        this.comment = comment;
+        this.title = title;
+    }
 }

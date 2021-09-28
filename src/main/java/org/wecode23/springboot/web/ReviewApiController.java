@@ -28,8 +28,19 @@ public class ReviewApiController {
 
     }
 
+    @PatchMapping("/reviews/{id}")
+    public ResponseEntity<HashMap> updateReview(@PathVariable Long id, @RequestBody ReviewSaveRequestDto requestDto) {
+
+        reviewService.updateReview(id, requestDto);
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("MESSAGE",MessageResponse.OK);
+
+        return ResponseEntity.status(HttpStatus.OK).body(map);
+    }
+
     @DeleteMapping("/reviews/{id}")
-    public ResponseEntity<HashMap> deleteReview(@PathVariable Long id){
+    public ResponseEntity<HashMap> deleteReview(@PathVariable Long id) {
 
         reviewService.deleteReview(id);
 
