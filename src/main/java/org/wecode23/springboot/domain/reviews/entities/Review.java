@@ -3,6 +3,7 @@ package org.wecode23.springboot.domain.reviews.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -50,7 +51,7 @@ public class Review {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Builder
     public Review(User user, Product product, Integer sizeRating,
