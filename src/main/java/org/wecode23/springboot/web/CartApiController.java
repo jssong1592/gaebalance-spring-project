@@ -5,10 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.wecode23.springboot.dto.CartResponseDto;
 import org.wecode23.springboot.dto.CartSaveRequestDto;
 import org.wecode23.springboot.service.CartService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,7 +32,7 @@ public class CartApiController {
     }
 
     @PatchMapping("/carts/{id}")
-    public  ResponseEntity<HashMap> updateCartItem(@PathVariable Long id, @RequestBody CartSaveRequestDto requestDto) {
+    public ResponseEntity<HashMap> updateCartItem(@PathVariable Long id, @RequestBody CartSaveRequestDto requestDto) {
 
         cartService.updateCartItem(id, requestDto);
 
@@ -38,4 +41,11 @@ public class CartApiController {
 
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }
+
+    @GetMapping("/carts")
+    public List<CartResponseDto> getCartList(@RequestBody HashMap<String, Long> map) {
+
+        return cartService.getCartList(map.get("userId"));
+    }
+
 }

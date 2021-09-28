@@ -8,8 +8,11 @@ import org.wecode23.springboot.domain.carts.repositories.CartRepository;
 import org.wecode23.springboot.domain.products.repositories.ProductRepository;
 import org.wecode23.springboot.domain.products.repositories.SizeRepository;
 import org.wecode23.springboot.domain.users.repositories.UserRepository;
+import org.wecode23.springboot.dto.CartResponseDto;
 import org.wecode23.springboot.dto.CartSaveRequestDto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -49,5 +52,18 @@ public class CartService {
         cart.updateCount(requestDto.getCount());
 
         return id;
+    }
+
+    @Transactional
+    public List<CartResponseDto> getCartList(Long userId) {
+        List<Cart> cartList = cartRepository.findByUserId(userId);
+        List<CartResponseDto> cartResponseDtoList = new ArrayList<>();
+        if (!cartList.isEmpty()) {
+            for (Cart cart : cartList) {
+                CartResponseDto cartResponseDto = new CartResponseDto(cart);
+                cartResponseDtoList.add(cartResponseDto);
+            }
+        }
+        return cartResponseDtoList;
     }
 }
