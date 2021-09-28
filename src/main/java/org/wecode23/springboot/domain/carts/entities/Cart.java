@@ -41,4 +41,16 @@ public class Cart {
     @Column(name = "count", columnDefinition = "INTEGER DEFAULT 0")
     private Integer count;
 
+    @Builder
+    public Cart(User user, Product product, Size size, Integer count) {
+
+        this.user = user;
+        this.product = product;
+        this.size = size;
+        this.count = count;
+    }
+
+    public void increaseCount(Integer count) {
+        this.count += count;
+    }
 }
