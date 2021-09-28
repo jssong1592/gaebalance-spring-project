@@ -8,7 +8,11 @@ import org.wecode23.springboot.domain.products.repositories.ProductRepository;
 import org.wecode23.springboot.domain.reviews.entities.Review;
 import org.wecode23.springboot.domain.reviews.entities.repositories.ReviewRepository;
 import org.wecode23.springboot.domain.users.repositories.UserRepository;
+import org.wecode23.springboot.dto.ReviewResponseDto;
 import org.wecode23.springboot.dto.ReviewSaveRequestDto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -44,4 +48,15 @@ public class ReviewService {
 
     }
 
+    public List<ReviewResponseDto> getReviewList(Long id) {
+        List<Review> reviewList = reviewRepository.findByProductId(id);
+        List<ReviewResponseDto> reviewResponseDtoList = new ArrayList<>();
+        if (!reviewList.isEmpty()) {
+            for (Review review : reviewList) {
+                ReviewResponseDto reviewResponseDto = new ReviewResponseDto(review);
+                reviewResponseDtoList.add(reviewResponseDto);
+            }
+        }
+        return reviewResponseDtoList;
+    }
 }

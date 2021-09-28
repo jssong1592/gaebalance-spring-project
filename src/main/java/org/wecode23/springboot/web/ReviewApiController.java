@@ -1,14 +1,15 @@
 package org.wecode23.springboot.web;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.wecode23.springboot.dto.ReviewResponseDto;
 import org.wecode23.springboot.dto.ReviewSaveRequestDto;
 import org.wecode23.springboot.service.ReviewService;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,6 +26,13 @@ public class ReviewApiController {
         map.put("MESSAGE",MessageResponse.CREATED);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(map);
+
+    }
+
+    @GetMapping("/reviews")
+    public List<ReviewResponseDto> getReviewList(@RequestParam Long productId) {
+
+        return reviewService.getReviewList(productId);
 
     }
 
