@@ -4,9 +4,7 @@ package org.wecode23.springboot.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.wecode23.springboot.dto.ReviewSaveRequestDto;
 import org.wecode23.springboot.service.ReviewService;
 
@@ -28,6 +26,17 @@ public class ReviewApiController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(map);
 
+    }
+
+    @DeleteMapping("/reviews/{id}")
+    public ResponseEntity<HashMap> deleteReview(@PathVariable Long id){
+
+        reviewService.deleteReview(id);
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("MESSAGE",MessageResponse.OK);
+
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
 }

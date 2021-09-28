@@ -26,4 +26,12 @@ public class ReviewService {
         return reviewRepository.save(requestDto.toEntity()).getId();
     }
 
+    @Transactional
+    public Long deleteReview(Long id) {
+
+        reviewRepository.deleteById(id);
+
+        return id;
+    }
+
 }
