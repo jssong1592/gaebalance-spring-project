@@ -66,4 +66,12 @@ public class CartService {
         }
         return cartResponseDtoList;
     }
+
+    @Transactional
+    public Long deleteCartItem(Long id) {
+
+        cartRepository.deleteById(id);
+
+        return id;
+    }
 }

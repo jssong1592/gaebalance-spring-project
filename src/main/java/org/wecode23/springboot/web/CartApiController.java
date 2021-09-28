@@ -48,4 +48,15 @@ public class CartApiController {
         return cartService.getCartList(map.get("userId"));
     }
 
+    @DeleteMapping("/carts/{id}")
+    public ResponseEntity<HashMap> deleteCartItem(@PathVariable Long id) {
+
+        cartService.deleteCartItem(id);
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("MESSAGE",MessageResponse.OK);
+
+        return ResponseEntity.status(HttpStatus.OK).body(map);
+    }
+
 }
